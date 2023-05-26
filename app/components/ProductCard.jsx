@@ -10,9 +10,9 @@ const ProductCard = ({ product, id }) => {
    const { Rating: rating, Price: price } = metadata
 
    const setProduct = useCart(state => state.setProduct)
+   const addItemToCart = useCart(state => state.addItemToCart)
+   const cart = useCart(state => state.cart)
    const router = useRouter()
-
-
 
     const truncateText = (text, size) => {
         if(text?.length > size) return text.slice(0, size) + "..."
@@ -33,7 +33,25 @@ const ProductCard = ({ product, id }) => {
         router.push(`/product?price_id=${price_id}`)
     }
 
+    const addToCartHandler = () => {
+        console.log('Product added to cart:', price_id)
+
+        const newProduct = {
+            quantity: 1,
+            price_id,
+            name,
+            description,
+            rating,
+            images,
+            price,
+        }
+        addItemToCart({ newProduct })
+    }
+
+    console.log("cart: ",cart)
+
   return (
+    
     <div className="flex flex-col cursor-pointer rounded-md " >
         <img  
             src={product.images[0]} 
@@ -52,7 +70,11 @@ const ProductCard = ({ product, id }) => {
             </div>
 
             <div className='w-full flex items-center justify-center' >
-                <button type="button" className="bg-black mb-2 mt-6 rounded-full text-gray-200 p-2 text-sm w-32 hover:bg-gray-700 hover:text-gray-200 transition duration-300 ease-in-out active:bg-gray-600 " >
+                <button 
+                    type="button" 
+                    className="bg-black mb-2 mt-6 rounded-full text-gray-200 p-2 text-sm w-32 hover:bg-gray-700 hover:text-gray-200 transition duration-300 ease-in-out active:bg-gray-600 " 
+                    onClick={addToCartHandler}
+                >
                     Add To Cart
                 </button>
             </div>

@@ -1,42 +1,44 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
-const useCart = create(
-    (set, get) => ({
-        cart: [],
-        product: {},
-        openModal: false,
+const useCart = create()(
+    persist(
+        (set) => ({
+            cart: [],
+            product: {},
+            openModal: false,
 
-        setOpenModal: () => {
-            set((state) => {
-                return {
-                    ...state,
-                    openModal: !state.openModal
-                }
-            })
+            setOpenModal: () => {
+                set((state) => {
+                    return {
+                        ...state,
+                        openModal: !state.openModal
+                    }
+                })
+            },
+
+            emptyCart: () => {
+                set((state) => {
+                    const newCart = []
+                    return {
+                        ...state,
+                        cart: newCart,
+                    }
+                })
+            },
+
+            setProduct: (item) => {
+                const { newProduct } = item
+                set((state) => {
+                    return {
+                        ...state,
+                        product: newProduct
+                    }
+                })
         },
 
-        emptyCart: () => {
-            set((state) => {
-                const newCart = []
-                return {
-                    ...state,
-                    cart: newCart,
-                }
-            })
-        },
-
-        setProduct: (item) => {
-            const { newProduct } = item
-            set((state) => {
-                return {
-                    ...state,
-                    product: newProduct
-                }
-            })
-        },
-
-        removeItemFromCart: (item) => {
-            const { itemId } = params
+        removeItemFromCart: (itemId) => {
+            // const { itemId } = params
             set((state) => {
                 const newCart = state.cart.filter((product, productId) => {
                     return productId !== itemId
@@ -51,7 +53,7 @@ const useCart = create(
         addItemToCart: (item) => {
             const { newItem } = item
             set((state) => {
-                const newCart = [...state.cart, newItem]
+                const newCart = [...state.cart, item]
                 return {
                     ...state,
                     cart: newCart,
@@ -59,6 +61,8 @@ const useCart = create(
             })
         },
 
+    }),{
+        name: "global", getStorage: () => localStorage
     })
 )
 

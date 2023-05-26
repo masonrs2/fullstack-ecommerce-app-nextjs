@@ -58,10 +58,12 @@ const Navbar = () => {
         {
             session ? (
                 <div className="flex gap-4 justify-center items-center text-sm" >
-                    <div className="flex gap-2  text-gray-600 hover:text-gray-500 justify-center items-center" >
-                        <BsCart4 className="w-4 h-4 lg:w-5 lg:h-5" />
-                        <h4 className="cursor-pointer font-medium" >Cart</h4>
-                    </div>
+                    <Link href={'/cart'} >
+                        <div className="flex gap-2  text-gray-600 hover:text-gray-500 justify-center items-center" >
+                                <BsCart4 className="w-4 h-4 lg:w-5 lg:h-5" />
+                                <h4 className="cursor-pointer font-medium" >Cart</h4>
+                        </div>
+                    </Link>
                     <button 
                         type="button" 
                         className="bg-black text-gray-300 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-800 hover:text-gray-200 transition duration-300 ease-in-out active:bg-gray-700"
