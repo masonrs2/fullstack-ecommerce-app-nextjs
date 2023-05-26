@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { headers, cookies } from 'next/headers'
 import SupabaseProvider from './supabase-provider'
+import Footer from './Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,10 +25,11 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-white`}>
         <SupabaseProvider session={session} >
           <Navbar />
           {children}
+          <Footer />
         </SupabaseProvider>
       </body>
     </html>

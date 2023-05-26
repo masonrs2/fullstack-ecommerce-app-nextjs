@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useSupabase } from '../supabase-provider'
 import { useRouter } from 'next/navigation'
 import { FaRegUser } from 'react-icons/fa'
+import { BsCart4 } from 'react-icons/bs'
 
 const Navbar = () => {
     const { supabase, session } = useSupabase()
@@ -37,7 +38,7 @@ const Navbar = () => {
             <ul className="hidden text-gray-600 md:flex font-medium text-sm gap-8 lg:gap-12 cursor-pointer" >
                 
                     <li className="hover:text-gray-500" >
-                        <Link href={'/'} >
+                        <Link href={'/Market'} >
                             Market
                         </Link>
                     </li>
@@ -58,8 +59,8 @@ const Navbar = () => {
             session ? (
                 <div className="flex gap-4 justify-center items-center text-sm" >
                     <div className="flex gap-2  text-gray-600 hover:text-gray-500 justify-center items-center" >
-                        <FaRegUser className="w-4 h-4 lg:w-5 lg:h-5" />
-                        <h4 className="cursor-pointer font-medium" >Account</h4>
+                        <BsCart4 className="w-4 h-4 lg:w-5 lg:h-5" />
+                        <h4 className="cursor-pointer font-medium" >Cart</h4>
                     </div>
                     <button 
                         type="button" 
