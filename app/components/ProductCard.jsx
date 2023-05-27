@@ -5,8 +5,8 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import useCart from '../(store)/store'
 
-const ProductCard = ({ product, id }) => {
-   const { id: price_id, description, metadata, images, name } = product
+const ProductCard = ({ product }) => {
+   const { id: price_id, description, metadata, images, name, default_price } = product
    const { Rating: rating, Price: price } = metadata
 
    const setProduct = useCart(state => state.setProduct)
@@ -44,6 +44,7 @@ const ProductCard = ({ product, id }) => {
             rating,
             images,
             price,
+            default_price
         }
         addItemToCart({ newProduct })
     }

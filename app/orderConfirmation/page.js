@@ -1,8 +1,10 @@
 import React from 'react'
+import Stripe from 'stripe'
 
 const page = () => {
+  
   return (
-    <div>Success!</div>
+    <div className="h-screen w-screen bg-white text-black" >Success!</div>
   )
 }
 

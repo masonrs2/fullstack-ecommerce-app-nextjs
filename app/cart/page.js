@@ -13,25 +13,17 @@ const page = () => {
     const removeItemFromCart = useCart(state => state.removeItemFromCart)
     const router = useRouter()
     console.log('cart', cart)
-
-    async function removeItemFromCartHandler() {
-
-        console.log('removed item', price_id)
-        removeItemFromCart(price_id)
-        
-    }
-
     
-    
-    const Cart = useGetFromStore(useCart, (state) => state.cart)
-    console.log('CART!!!', Cart)
+    // const Cart = useGetFromStore(useCart, (state) => state.cart)
+    // console.log('CART!!!', Cart)
     
     async function checkOutHandler() {
+        console.log("ITEMS IN CHECKOUT CART", cart)
         const lineItems = cart.map(cartItem => {
             console.log("Cart Item",cartItem?.name)
             return {
-                price: cartItem.price_id,
-                quantity: 1
+                price: cartItem?.newProduct?.default_price,
+                quantity: 1,
             }
         })
         const res = await fetch('/api/checkout', {
