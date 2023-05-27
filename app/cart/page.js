@@ -15,9 +15,10 @@ const page = () => {
     console.log('cart', cart)
 
     async function removeItemFromCartHandler() {
-    
-        removeItemFromCart(price_id)
+
         console.log('removed item', price_id)
+        removeItemFromCart(price_id)
+        
     }
 
     

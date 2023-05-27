@@ -41,7 +41,7 @@ const useCart = create()(
             // const { itemId } = params
             set((state) => {
                 const newCart = state.cart.filter((product, productId) => {
-                    return productId !== itemId
+                    return productId != itemId
                 })
                 return {
                     ...state, 

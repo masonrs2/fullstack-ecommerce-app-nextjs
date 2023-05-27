@@ -2,13 +2,16 @@ import React from 'react'
 import { BsTrash3 } from 'react-icons/bs'
 import useCart from '../(store)/store'
 const CartItem = ({ cartItem, index }) => {
+    const cart = useCart(state => state.cart)
     const { price_id } = cartItem?.newProduct
     const removeItemFromCart = useCart(state => state.removeItemFromCart)
     console.log(price_id)
+
     async function removeItemFromCartHandler() {
     
-        removeItemFromCart(price_id)
-        console.log('removed item', price_id)
+        console.log('removed item index', index)
+        removeItemFromCart(index)
+        console.log('CART AFTER REMOVAL', cart)
     }
 
    
@@ -29,7 +32,7 @@ const CartItem = ({ cartItem, index }) => {
                                 <p className="" >Qty: {cartItem?.newProduct?.quantity}</p>
                                 <p className="font-medium" >${cartItem?.newProduct?.price}</p>
                                 <div 
-                                    onClick={'removeItemFromCartHandler'} 
+                                    onClick={removeItemFromCartHandler} 
                                     className="cursor-pointer" >
                                         <BsTrash3 className="text-gray-500 hover:text-gray-400 active:text-gray-300" /> 
                                 </div>
