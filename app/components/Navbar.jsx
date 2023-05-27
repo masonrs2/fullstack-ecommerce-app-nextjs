@@ -20,6 +20,15 @@ const Navbar = () => {
         router.push('/login')
         
     }
+    const signInWithGoogle = async () => {
+        
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+        })
+
+        if(error) throw error
+    }
+
 
     useEffect(() => {
         if(!session) router.push('/login')
@@ -67,6 +76,7 @@ const Navbar = () => {
                     <button 
                         type="button" 
                         className="bg-black text-gray-300 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-800 hover:text-gray-200 transition duration-300 ease-in-out active:bg-gray-700"
+                        onClick={signOut}
                     >   Sign Out
                     </button>
                 </div>
@@ -74,11 +84,14 @@ const Navbar = () => {
             : (
 
                 <div className="flex gap-4 justify-center items-center text-sm" >
-                    <h4 className="cursor-pointer font-medium text-gray-600 hover:text-gray-500" >Customer Login</h4>
+                    <h4 
+                        className="cursor-pointer font-medium text-gray-600 hover:text-gray-500" 
+                        onClick={signInWithGoogle}
+                    >Customer Login</h4>
                     <button 
                         type="button" 
                         className="bg-black text-gray-300 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-800 hover:text-gray-200 transition duration-300 ease-in-out"
-                        onClick={signOut}
+                        onClick={signInWithGoogle}
                     >   Sign Up
                     </button>
                 </div>
