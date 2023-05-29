@@ -7,7 +7,7 @@ import useCart from '../(store)/store'
 
 const ProductCard = ({ product }) => {
    const { id: price_id, description, metadata, images, name, default_price } = product
-   const { Rating: rating, Price: price } = metadata
+   const { Rating: rating, Price: price, OriginalPrice: original_price } = metadata
 
    const setProduct = useCart(state => state.setProduct)
    const addItemToCart = useCart(state => state.addItemToCart)
@@ -25,11 +25,14 @@ const ProductCard = ({ product }) => {
             description,
             price_id,
             price,
-            rating
+            rating,
+            original_price,
+            images,
+            default_price
         }
 
         setProduct({ newProduct })
-        console.log("Product: ", newProduct)
+        console.log("Product to set: ", newProduct)
         router.push(`/product?price_id=${price_id}`)
     }
 
@@ -46,6 +49,7 @@ const ProductCard = ({ product }) => {
             price,
             default_price
         }
+        console.log("ADDED TO CART", newProduct)
         addItemToCart({ newProduct })
     }
 
@@ -54,6 +58,7 @@ const ProductCard = ({ product }) => {
   return (
     
     <div className="flex flex-col cursor-pointer rounded-md " >
+        
         <img  
             src={product.images[0]} 
             alt="fruit" 
